@@ -8,7 +8,7 @@ from sqlalchemy import Column, String
 import os
 
 
-HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
+HBNB_TYPE_STORAGE = os.getenv("HBNB_TYPE_STORAGE")
 
 
 class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object): 
