@@ -2,15 +2,18 @@
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
-from os import getenv
+import os
 
-class City(BaseModel, Base if (getenv("HBNB_TYPE_STORAGE")
-                               == "db") else object):
+HBNB_TYPE_STORAGE = os.environ['HBNB_TYPE_STORAGE']
+
+class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object): 
     """ The city class, contains state ID and name """
-    if getenv("HBNB_TYPE_STORAGE") == "db":
+    if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'cities'
-        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey('states.id'),
+                        nullable=False)
+        
     else:
         state_id = ""
         name = ""
