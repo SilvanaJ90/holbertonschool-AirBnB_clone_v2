@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 import os
 
 
-HBNB_TYPE_STORAGE = os.environ['HBNB_TYPE_STORAGE']
+HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
 class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object): 
@@ -14,7 +14,7 @@ class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
-        cities = relationship("city", backref="state", cascade="delete")
+        cities = relationship("City", backref="state", cascade="delete")
     else:
         name = ""
 
