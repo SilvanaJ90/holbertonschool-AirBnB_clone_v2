@@ -21,9 +21,9 @@ class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
     @property
     def cities(self):
         """
-
         """
         from models import storage
+        from models.city import City
         result = []
         cities = storage.all(City).values()
         for city in cities:
