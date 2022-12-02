@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """ Doc """
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import Session
+from models.base_model import Base
 """from models.user import User"""
 """from models.place import Place"""
 from models.state import State
@@ -23,26 +23,39 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        user = os.getenv('HBNB_MYSQL_USER')
-        pwd = os.getenv('HBNB_MYSQL_PWD')
-        host = os.getenv('HBNB_MYSQL_HOST')
-        db = os.getenv('HBNB_MYSQL_DB')
-        self.__engine = create_engine("mysql+mysqldb://{:s}:{:s}@{:s}/{:s}".format(
-                                    user, pwd, host, db), pool_pre_ping=True)
+        """constructor DBStorage object"""
+        HBNB_MYSQL_USER = os.getenv('HBNB_MYSQL_USER')
+        HBNB_MYSQL_PWD = os.getenv('HBNB_MYSQL_PWD')
+        HBNB_MYSQL_HOST = os.getenv('HBNB_MYSQL_HOST')
+        HBNB_MYSQL_DB = os.getenv('HBNB_MYSQL_DB')
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+            HBNB_MYSQL_USER,
+            HBNB_MYSQL_PWD,
+            HBNB_MYSQL_HOST,
+            HBNB_MYSQL_DB
+        ), pool_pre_ping=True)
 
-        metaData = MetaData()
         if os.getenv('HBNB_ENV') == 'test':
-            metaData.drop_all()
+            Base.metadata.drop_all(self.__engi
 
     def all(self, cls=None):
-        new_dict = {}
-        for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
-        return (new_dict)
+        self.__session = Session(self.__engine)
+        ret_dict = dict()
+        if cls:
+            for obj in self.__session.query(cls).all():
+                ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        else:
+            from models.user import User
+            from models.place import Place
+            from models.state import State
+            from models.city import City
+            from models.amenity import Amenity
+            from models.review import Review
+            class_list = [State, City]
+            for query_cls in class_list:
+                for obj in self.__session.query(query_cls).all():
+                    ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        return ret_dict
 
     def new(self, obj):
         """ Add obj to session"""
