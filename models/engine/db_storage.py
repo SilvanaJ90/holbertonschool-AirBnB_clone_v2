@@ -56,11 +56,11 @@ class DBStorage:
         return ret_dict
 
     def new(self, obj):
-        """ Add obj to session"""
+        """add the object to the current database session"""
         self.__session.add(obj)
 
-    def save(self, obj):
-        """ Save tables of DB"""
+    def save(self):
+        """commit all changes of the current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
