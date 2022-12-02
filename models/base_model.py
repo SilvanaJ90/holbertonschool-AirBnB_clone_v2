@@ -35,7 +35,6 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = self.created_at
-
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
@@ -44,21 +43,23 @@ class BaseModel:
     def save(self):
         """Updates updated_at with current time when instance is changed"""
         from models import storage
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
-        my_dict = self.__dict__.copy()
-        my_dict["_class"] = type(self).__name__
-        my_dict["created_at"] = my_dict["created_at"].isoformat()
-        my_dict["updated_at"] = my_dict["updated_at"].isoformat()
-        if "_sa_instance_state" in my_dict:
-            del my_dict["_sa_instance_state"]
-        return my_dict
+        dictionary = {}
+        dictionary.update(self.__dict__)
+        dictionary.update({'__class__':
+                          (str(type(self)).split('.')[-1]).split('\'')[0]})
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+        if '_sa_instance_state' in dictionary.keys():
+            del dictionary['_sa_instance_state']
+        return dictionary
 
     def delete(self):
-        """delete the current instance from the storage"""
+        """ deletes instance from objecst dic"""
         from models import storage
         storage.delete(self)
