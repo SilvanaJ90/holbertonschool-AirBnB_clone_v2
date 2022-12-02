@@ -37,15 +37,23 @@ class DBStorage:
             metaData.drop_all()
 
     def all(self, cls=None):
-        """query on the current database session"""
-        new_dict = {}
-        for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
-        return (new_dict)
+        self.__session = Session(self.__engine)
+        ret_dict = dict()
+        if cls:
+            for obj in self.__session.query(cls).all():
+                ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        else:
+            from models.user import User
+            from models.place import Place
+            from models.state import State
+            from models.city import City
+            from models.amenity import Amenity
+            from models.review import Review
+            class_list = [State, City]
+            for query_cls in class_list:
+                for obj in self.__session.query(query_cls).all():
+                    ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        return ret_dict
 
     def new(self, obj):
         """add the object to the current database session"""
