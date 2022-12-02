@@ -1,41 +1,38 @@
-#!/usr/bin/python3
-"""Contains the class DBStorage"""
-
-from sqlalchemy import create_engine
-from os import getenv
-from models.base_model import Base
-from models.user import User
+#!/usr/bin/python
+""" Doc """
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import Session
+"""from models.user import User"""
+"""from models.place import Place"""
 from models.state import State
 from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from sqlalchemy.orm import scoped_session, sessionmaker
+"""from models.amenity import Amenity"""
+"""from models.review import Review"""
+import os
 
-classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
 
+classes = {
+            """'User': User, 'Place': Place, 'Amenity': Amenity, 'Review': Review,"""
+            'State': State, 'City': City
+            }
 
 class DBStorage:
-    """Interacts with MySQL database"""
+    """ Doc """
+
     __engine = None
     __session = None
 
     def __init__(self):
-        """constructor DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-            HBNB_MYSQL_USER,
-            HBNB_MYSQL_PWD,
-            HBNB_MYSQL_HOST,
-            HBNB_MYSQL_DB
-        ), pool_pre_ping=True)
+        user = os.getenv('HBNB_MYSQL_USER')
+        pwd = os.getenv('HBNB_MYSQL_PWD')
+        host = os.getenv('HBNB_MYSQL_HOST')
+        db = os.getenv('HBNB_MYSQL_DB')
+        self.__engine = create_engine("mysql+mysqldb://{:s}:{:s}@{:s}/{:s}".format(
+                                    user, pwd, host, db), pool_pre_ping=True)
 
-        if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(self.__engine)
+        metaData = MetaData()
+        if os.getenv('HBNB_ENV') == 'test':
+            metaData.drop_all()
 
     def all(self, cls=None):
         self.__session = Session(self.__engine)
