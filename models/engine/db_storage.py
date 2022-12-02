@@ -70,19 +70,10 @@ class DBStorage:
         """ Create all tables of DB """
         from models.base_model import Base
         from sqlalchemy.orm import sessionmaker, scoped_session
-        """from models.user import User
-        from models.place import Place"""
-        from models.state import State
-        from models.city import City
-        f"""rom models.amenity import Amenity
-        from models.review import Review"""
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                        expire_on_commit=False)
-        Session = scoped_session(session_factory)
-        self.__session = Session()
-
-        
+        sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(sess_factory)
+        self.__session = Session
 
         def close(self):
             Session.close(self.__session)
