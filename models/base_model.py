@@ -34,8 +34,6 @@ class BaseModel:
             self.__dict__.update(kwargs)
 
 
-
-
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]

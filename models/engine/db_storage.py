@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models.base_model import Base
 from sqlalchemy.orm import Session
-"""from models.user import User"""
+from models.user import User
 """from models.place import Place"""
 from models.state import State
 from models.city import City
@@ -14,7 +14,7 @@ import os
 
 
 classes = {
-            """'User': User, 'Place': Place, 'Amenity': Amenity, 'Review': Review,"""
+            'User': User, """'Place': Place, 'Amenity': Amenity, 'Review': Review,"""
             'State': State, 'City': City
             }
 
