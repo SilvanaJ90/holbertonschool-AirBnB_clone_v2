@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        command= args.split(" ")
+        command = args.split(" ")
         if not command:
             print("** class name missing **")
             return

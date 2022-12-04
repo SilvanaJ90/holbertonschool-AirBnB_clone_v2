@@ -24,15 +24,14 @@ class BaseModel:
         storage.new(self)
         if kwargs:
             if 'updated_at' in kwargs.keys():
-                kwargs['updated_at'] = datetime.isoformat(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['updated_at'] = datetime.isoformat(
+                    kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
             if 'created-at' in kwargs.keys():
-                kwargs['created_at'] = datetime.isoformat(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['created_at'] = datetime.isoformat(
+                    kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
             if '__class__' in kwargs.keys():
                 del kwargs['__class__']
             self.__dict__.update(kwargs)
-
 
     def __str__(self):
         """Returns a string representation of the instance"""

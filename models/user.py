@@ -4,8 +4,8 @@ from models.base_model import BaseModel
 from sqlalchemy import Column, String
 import os
 
-
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
+
 
 class User(BaseModel):
     """This class defines a user by various attributes"""

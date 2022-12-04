@@ -12,7 +12,8 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         if not cls:
             return FileStorage.__objects
-        return {key: object_ for key, object_ in FileStorage.__objects.items() if isinstance(object_, cls)}
+        return {key: object_ for key, object_
+                in FileStorage.__objects.items() if isinstance(object_, cls)}
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -54,4 +55,5 @@ class FileStorage:
     def delete(self, obj=None):
         """ delete obj if exist"""
         if obj:
-            del(FileStorage.__objects[obj.to_dict()['__class__'] + '.' + obj.id])
+            del(FileStorage.__objects[obj.to_dict()['__class__']
+                + '.' + obj.id])
