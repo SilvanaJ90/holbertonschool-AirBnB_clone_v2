@@ -8,15 +8,13 @@ from models.user import User
 from models.state import State
 from models.city import City
 import os
-"""from models.amenity import Amenity"""
-from models.review import Review
 from models.place import Place
 
 classes = {
-            'User': User, 'Place': Place,
-            'Review': Review,
+            'User': User,
+            'Place': Place, """'Amenity': Amenity, 'Review': Review,"""
             'State': State, 'City': City
-          }
+            }
 
 
 class DBStorage:
