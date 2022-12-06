@@ -13,10 +13,10 @@ from models.review import Review
 from models.place import Place
 
 classes = {
-            'User': User,
-            'Place': Place, """'Amenity': Amenity,""" 'Review': Review,
+            'User': User, 'Place': Place,
+            'Review': Review,
             'State': State, 'City': City
-            }
+          }
 
 
 class DBStorage:
