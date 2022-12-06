@@ -19,3 +19,4 @@ class User(BaseModel, Base):
         backref=backref("user", cascade="all,delete"),
         passive_deletes=True,
         single_parent=True
+        )
