@@ -24,4 +24,3 @@ class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
             city_obj = storage.all(City)
             return [city for city in city_obj.values(
             ) if city.state_id == self.id]
-
