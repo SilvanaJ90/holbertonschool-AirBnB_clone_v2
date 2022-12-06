@@ -10,11 +10,11 @@ from models.city import City
 import os
 """from models.amenity import Amenity"""
 """from models.review import Review"""
-"""from models.place import Place"""
+from models.place import Place
 
 classes = {
             'User': User,
-            """'Place': Place, 'Amenity': Amenity, 'Review': Review,"""
+            'Place': Place, """'Amenity': Amenity, 'Review': Review,"""
             'State': State, 'City': City
             }
 
