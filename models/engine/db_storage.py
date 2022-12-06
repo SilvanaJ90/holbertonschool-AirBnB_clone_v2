@@ -4,17 +4,13 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models.base_model import Base
 from sqlalchemy.orm import Session
-from models.user import User
+
 from models.state import State
 from models.city import City
 import os
-from models.place import Place
 
-classes = {
-            'User': User,
-            'Place': Place, """'Amenity': Amenity, 'Review': Review,"""
-            'State': State, 'City': City
-            }
+
+classes = {'State': State, 'City': City}
 
 
 class DBStorage:
@@ -43,12 +39,8 @@ class DBStorage:
             for obj in self.__session.query(cls).all():
                 ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
         else:
-            from models.user import User
-            from models.place import Place
             from models.state import State
             from models.city import City
-            from models.amenity import Amenity
-            from models.review import Review
             class_list = [State, City]
             for query_cls in class_list:
                 for obj in self.__session.query(query_cls).all():
