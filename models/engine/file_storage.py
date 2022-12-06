@@ -9,11 +9,24 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        if not cls:
-            return FileStorage.__objects
-        return {key: object_ for key, object_
-                in FileStorage.__objects.items() if isinstance(object_, cls)}
+        from sqlalchemy.orm import scoped_session, sessionmaker
+        self.__session = Session(self.__engine)
+        ret_dict = dict()
+        if cls:
+            for obj in self.__session.query(cls).all():
+                ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        else:
+            from models.user import User
+            from models.place import Place
+            from models.state import State
+            from models.city import City
+            from models.amenity import Amenity
+            from models.review import Review
+            class_list = [State, City]
+            for query_cls in class_list:
+                for obj in self.__session.query(query_cls).all():
+                    ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+        return ret_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
