@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 import os
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
@@ -16,8 +16,8 @@ class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         places = relationship(
             "Place relationship",
-            backref='user',
-            cascade="all, delete",
+            backref=backref("cities", cascade="all"),
+            cascade="all",
             passive_deletes=True)
     else:
         state_id = ""
