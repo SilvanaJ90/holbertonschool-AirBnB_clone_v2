@@ -1,21 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a class User"""
-from models.base_model import BaseModel
-
-
-class User(BaseModel):
-    """This class defines a user by various attributes"""
-    email = ''
-    password = ''
-    first_name = ''
-    last_name = ''
-
-
-
-
-
-"""#!/usr/bin/python3
-User Module for HBNB project
+"""User Module for HBNB project"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship, backref
@@ -25,14 +9,14 @@ HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
 class User(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
-    State class
+    """user class"""
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
-        places = relationship(
+        """places = relationship(
             "Place",
             cascade="all,delete",
             backref=backref("user", cascade="all,delete"),
@@ -45,9 +29,9 @@ class User(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
             backref=backref("user", cascade="all,delete"),
             passive_deletes=True,
             single_parent=True
-        )
+        )"""
     else:
         email = ""
         password = ""
         first_name = ""
-        last_name = """""
+        last_name = ""
