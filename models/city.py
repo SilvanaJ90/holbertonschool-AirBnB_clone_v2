@@ -8,7 +8,7 @@ import os
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
-class City(BaseModel, Base):
+class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
     """The city class, contains state ID and name"""
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'cities'
