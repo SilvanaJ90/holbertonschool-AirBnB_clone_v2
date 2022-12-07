@@ -29,8 +29,6 @@ class Place(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
             cascade="all,delete",
             backref=backref("place", cascade="all,delete"),
             passive_deletes=True)"""
-
-
     else:
         city_id = ""
         user_id = ""
