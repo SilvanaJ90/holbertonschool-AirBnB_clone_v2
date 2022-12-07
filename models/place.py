@@ -1,5 +1,25 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
+from models.base_model import BaseModel
+
+
+class Place(BaseModel):
+    """ A place to stay """
+    city_id = ""
+    user_id = ""
+    name = ""
+    description = ""
+    number_rooms = 0
+    number_bathrooms = 0
+    max_guest = 0
+    price_by_night = 0
+    latitude = 0.0
+    longitude = 0.0
+    amenity_ids = []
+
+
+"""#!/usr/bin/python3
+Place Module for HBNB project
 from models.base_model import BaseModel, Base
 from models.base_model import BaseModel, Base
 import os
@@ -11,7 +31,7 @@ HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
 class Place(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
-    """ Place class """
+    Place class
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = "places"
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -43,3 +63,4 @@ class Place(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+"""
