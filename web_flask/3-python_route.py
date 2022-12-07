@@ -21,10 +21,10 @@ def cisfun(text):
     return 'C {}'.format(text.replace("_", " "))
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python/', strict_slashes=False, defaults={'text': 'is cool'})
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
-    return("Python {}".format(text.replace("_", " ")))
+    return "Python {}".format(text.replace("_", " "))
 
 
 if __name__ == '__main__':
