@@ -13,17 +13,20 @@ def Hello():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """ display HBNB"""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def cisfun(text):
+    """ C is fun"""
     return 'C {}'.format(text.replace("_", " "))
 
 
 @app.route('/python/', strict_slashes=False, defaults={'text': 'is cool'})
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
+    """The default value of text is “is cool”"""
     return "Python {}".format(text.replace("_", " "))
 
 
