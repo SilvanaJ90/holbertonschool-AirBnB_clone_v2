@@ -1,16 +1,5 @@
 #!/usr/bin/python3
-""" City Module for HBNB project """
-from models.base_model import BaseModel
-
-
-class City(BaseModel):
-    """ The city class, contains state ID and name """
-    state_id = ""
-    name = ""
-
-
-"""#!/usr/bin/python3
-City Module for HBNB project
+"""City Module for HBNB project"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy import  relationship, backref
@@ -20,7 +9,7 @@ HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
 class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
-    The city class, contains state ID and name
+    """The city class, contains state ID and name"""
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'cities'
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
@@ -29,8 +18,7 @@ class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
             "Place",
             cascade="all",
             backref=backref("cities", cascade="all"),
-            passive_deletes=True
+            passive_deletes=True)
     else:
         state_id = ""
         name = ""
-"""
