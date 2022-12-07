@@ -39,12 +39,6 @@ class DBStorage:
         if os.getenv('HBNB_ENV') == 'test':
             metaData.drop_all()
 
-    __engine.connect()
-
-    metaData = MetaData()
-
-    session = Session(__engine)
-
     def all(self, cls=None):
         self.__session = Session(self.__engine)
         ret_dict = dict()
@@ -83,5 +77,6 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
-    
-    session.close()
+
+    def close(self):
+        self.__Session.close()
