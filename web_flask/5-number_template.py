@@ -32,13 +32,13 @@ def python_text(text):
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def number(n):
+def number_int(n):
     """ display “n is a number” only if n is an integer"""
     return("{} is a number".format(n))
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
+def number_temp(n):
     """ display HTML if n is int"""
     return(render_template('5-number.html', n=n))
 
