@@ -24,6 +24,12 @@ class Place(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
+        reviews = relationship(
+            "Review",
+            cascade="all,delete",
+            backref=backref("place", cascade="all,delete"),
+            passive_deletes=True)
+
 
     else:
         city_id = ""
