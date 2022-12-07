@@ -19,14 +19,8 @@ class State(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
 
         @property
         def cities(self):
-            from models import storage
             from models.city import City
-            """ getter storage - city obj """
-            all_cities = storage.all(City)
-            city_list = []
-
-            for city in all_cities.values():
-                if city.state_id == self.id:
-                    city_list.append(city)
-
-            return city_list
+            from models import storage
+            city_obj = storage.all(City)
+            return [city for city in city_obj.values(
+            ) if city.state_id == self.id]
