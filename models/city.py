@@ -2,13 +2,13 @@
 """City Module for HBNB project"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy import  relationship, backref
+from sqlalchemy import  relationship
 import os
 
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 
 
-class City(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
+class City(BaseModel, Base):
     """The city class, contains state ID and name"""
     if HBNB_TYPE_STORAGE == 'db':
         __tablename__ = 'cities'
