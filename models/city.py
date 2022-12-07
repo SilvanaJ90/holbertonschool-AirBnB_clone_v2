@@ -2,7 +2,7 @@
 """City Module for HBNB project"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy import  relationship, backref
+"""from sqlalchemy import  relationship, backref"""
 import os
 
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
