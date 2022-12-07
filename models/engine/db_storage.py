@@ -13,8 +13,8 @@ import os
 from models.place import Place"""
 
 classes = {
-            """'User': User,"""
-           """" 'Place': Place, Amenity': Amenity, 'Review': Review,""""
+            """'User': User,
+            'Place': Place, Amenity': Amenity, 'Review': Review,"""
             'State': State, 'City': City
             }
 
