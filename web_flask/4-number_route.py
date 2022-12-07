@@ -35,7 +35,7 @@ def python_text(text):
 def number(n):
     """ display “n is a number” only if n is an integer"""
     if n is int:
-        return f'{n}\' is a number'
+        return("{} is a number".format(n))
 
 
 if __name__ == '__main__':
