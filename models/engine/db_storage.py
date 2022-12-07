@@ -7,10 +7,11 @@ from sqlalchemy.orm import Session
 from models.user import User
 from models.state import State
 from models.city import City
+from models.place import Place
 import os
 """from models.amenity import Amenity"""
 """from models.review import Review"""
-from models.place import Place
+
 
 classes = {
             'User': User,
@@ -51,7 +52,7 @@ class DBStorage:
             from models.city import City
             from models.amenity import Amenity
             from models.review import Review
-            class_list = [State, City]
+            class_list = [User, State, City, Place]
             for query_cls in class_list:
                 for obj in self.__session.query(query_cls).all():
                     ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
