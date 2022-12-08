@@ -1,19 +1,26 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Test user"""
+import unittest
 from models.amenity import Amenity
+from models.base_model import BaseModel
 
 
-class test_Amenity(test_basemodel):
-    """ """
+class TestState(unittest.TestCase):
+    """class Test from user"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Amenity"
-        self.value = Amenity
+    def test_amenity(self):
+        """Test User"""
+        a = Amenity()
+        self.assertTrue(issubclass(a.__class__, BaseModel))
+        self.assertTrue(hasattr(a, "id"))
+        self.assertTrue(hasattr(a, "created_at"))
+        self.assertTrue(hasattr(a, "updated_at"))
+        self.assertEqual(a.name, "")
 
-    def test_name2(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+        a.name = "My First Model"
+        s = f"[{a.__class__.__name__}] ({a.id}) {a.__dict__}"
+        self.assertEqual(s, str(a))
+
+
+if __name__ == '__main__':
+    unittest.main()

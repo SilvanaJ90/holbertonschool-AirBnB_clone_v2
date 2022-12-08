@@ -1,24 +1,27 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Test user"""
+import unittest
 from models.city import City
+from models.base_model import BaseModel
 
 
-class test_City(test_basemodel):
-    """ """
+class TestCity(unittest.TestCase):
+    """class Test from user"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "City"
-        self.value = City
+    def test_city(self):
+        """Test User"""
+        c = City()
+        self.assertTrue(issubclass(c.__class__, BaseModel))
+        self.assertTrue(hasattr(c, "id"))
+        self.assertTrue(hasattr(c, "created_at"))
+        self.assertTrue(hasattr(c, "updated_at"))
+        self.assertEqual(c.name, "")
 
-    def test_state_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.state_id), str)
+        c.state_id = "89"
+        c.name = "My First Model"
+        s = f"[{c.__class__.__name__}] ({c.id}) {c.__dict__}"
+        self.assertEqual(s, str(c))
 
-    def test_name(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+
+if __name__ == '__main__':
+    unittest.main()

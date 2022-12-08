@@ -1,34 +1,35 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Test user"""
+import unittest
 from models.user import User
+from models.base_model import BaseModel
 
 
-class test_User(test_basemodel):
-    """ """
+class TestUser(unittest.TestCase):
+    """class Test from user"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "User"
-        self.value = User
+    def test_user(self):
+        """Test User"""
+        u = User()
+        self.assertTrue(issubclass(u.__class__, BaseModel))
+        self.assertTrue(hasattr(u, "id"))
+        self.assertTrue(hasattr(u, "created_at"))
+        self.assertTrue(hasattr(u, "updated_at"))
+        self.assertTrue(hasattr(u, "first_name"))
+        self.assertTrue(hasattr(u, "last_name"))
+        self.assertTrue(hasattr(u, "email"))
+        self.assertTrue(hasattr(u, "password"))
+        self.assertEqual(u.first_name, "")
+        self.assertEqual(u.last_name, "")
+        self.assertEqual(u.email, "")
+        self.assertEqual(u.password, "")
+        u.first_name = "Betty"
+        u.last_name = "Bar"
+        u.email = "airbnb@mail.com"
+        u.password = "root"
+        s = f"[{u.__class__.__name__}] ({u.id}) {u.__dict__}"
+        self.assertEqual(s, str(u))
 
-    def test_first_name(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.first_name), str)
 
-    def test_last_name(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.last_name), str)
-
-    def test_email(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.email), str)
-
-    def test_password(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.password), str)
+if __name__ == '__main__':
+    unittest.main()

@@ -1,69 +1,48 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Test user"""
+import unittest
 from models.place import Place
+from models.base_model import BaseModel
 
 
-class test_Place(test_basemodel):
-    """ """
+class TestCity(unittest.TestCase):
+    """class Test from user"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Place"
-        self.value = Place
+    
 
-    def test_city_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
+    def test_place(self):
+        """Test User"""
+        p = Place()
+        self.assertTrue(issubclass(p.__class__, BaseModel))
+        self.assertTrue(hasattr(p, "id"))
+        self.assertTrue(hasattr(p, "created_at"))
+        self.assertTrue(hasattr(p, "updated_at"))
+        self.assertEqual(p.city_id, "")
+        self.assertEqual(p.user_id, "")
+        self.assertEqual(p.name, "")
+        self.assertEqual(p.description, "")
+        self.assertEqual(p.number_rooms, 0)
+        self.assertEqual(p.number_bathrooms, 0)
+        self.assertEqual(p.max_guest, 0)
+        self.assertEqual(p.price_by_night, 0)
+        self.assertEqual(p.latitude, 0.0)
+        self.assertEqual(p.longitude, 0.0)
+        self.assertEqual(p.amenity_ids, {})
 
-    def test_user_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+        p.city_id = "89"
+        p.user_id = "1"
+        p.name = "My First Model"
+        p.description = "My First Model"
+        p.number_rooms = 2
+        p.number_bathrooms = 2
+        p.max_guest = 3
+        p.price_by_night = 20
+        p.latitude = 5.5
+        p.longitude = 3.2
+        p.amenity_ids = {}
+        s = f"[{p.__class__.__name__}] ({p.id}) {p.__dict__}"
+        self.assertEqual(s, str(p))
 
-    def test_name(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
 
-    def test_description(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.description), str)
-
-    def test_number_rooms(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.number_rooms), int)
-
-    def test_number_bathrooms(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.number_bathrooms), int)
-
-    def test_max_guest(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.max_guest), int)
-
-    def test_price_by_night(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.price_by_night), int)
-
-    def test_latitude(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
-
-    def test_longitude(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
-
-    def test_amenity_ids(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.amenity_ids), list)
+if __name__ == '__main__':
+    unittest.main()
