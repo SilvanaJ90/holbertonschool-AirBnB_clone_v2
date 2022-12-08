@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Place Module for HBNB project"""
 from models.base_model import BaseModel, Base
-from models.base_model import BaseModel, Base
 import os
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship, backref
 
 
@@ -29,6 +28,17 @@ class Place(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
             cascade="all,delete",
             backref=backref("place", cascade="all,delete"),
             passive_deletes=True)
+
+        place_amenity = Table('place_amenity', Base.metadata,
+                              Column('place_id', String(60),
+                                     ForeignKey('places.id'),
+                                     primary_key=True, nullable=False),
+                              Column('amenity_id', String(60),
+                                     ForeignKey('amenities.id'),
+                                     primary_key=True, nullable=False))
+
+        amenities = relationship('Amenity', secondary=place_amenity,
+                                 viewonly=False, backref='places')
     else:
         city_id = ""
         user_id = ""

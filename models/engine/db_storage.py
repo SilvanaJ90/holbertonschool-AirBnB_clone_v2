@@ -9,13 +9,13 @@ from models.state import State
 from models.city import City
 from models.place import Place
 import os
-"""from models.amenity import Amenity"""
+from models.amenity import Amenity
 from models.review import Review
 
 
 classes = {
             'User': User,
-            'Place': Place, """Amenity': Amenity,""" 'Review': Review,
+            'Place': Place, 'Amenity': Amenity, 'Review': Review,
             'State': State, 'City': City
             }
 
@@ -46,7 +46,7 @@ class DBStorage:
             for obj in self.__session.query(cls).all():
                 ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
         else:
-            class_list = [User, State, City, Place, Review]
+            class_list = [User, State, City, Place, Review, Amenity]
             for query_cls in class_list:
                 for obj in self.__session.query(query_cls).all():
                     ret_dict[obj.to_dict()['__class__'] + '.' + obj.id] = obj
