@@ -17,7 +17,7 @@ class User(BaseModel, Base if HBNB_TYPE_STORAGE == 'db' else object):
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
         places = relationship("Place", backref="user", cascade="delete")
-        
+
         reviews = relationship(
             "Review",
             cascade="all,delete",
