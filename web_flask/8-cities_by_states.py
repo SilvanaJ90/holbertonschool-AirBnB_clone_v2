@@ -15,7 +15,7 @@ def cities_list():
 
 
 @app.teardown_appcontext
-def close(exception):
+def close(self):
     storage.close()
 
 
