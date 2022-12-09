@@ -7,7 +7,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """ du must use storage for fetching data from the storage """
     states = storage.all(State).values()
@@ -15,7 +15,7 @@ def states_list():
 
 
 @app.teardown_appcontext
-def close(exc):
+def close(exception):
     storage.close()
 
 
