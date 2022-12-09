@@ -11,7 +11,7 @@ app = Flask(__name__)
 def states_list():
     """ du must use storage for fetching data from the storage """
     states = storage.all(State).values()
-    return render_template('7-states_list.html', states=states)
+    return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext
