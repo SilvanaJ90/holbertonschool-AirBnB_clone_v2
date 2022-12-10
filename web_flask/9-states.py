@@ -16,10 +16,12 @@ def states_list():
 
 
 @app.route('/states/<id>', strict_slashes=False)
-def cities_list():
+def cities_list(state_id=None):
     """ du must use storage for fetching data from the storage """
     states = storage.all(State).values()
-    return render_template('9-states.html', states=states)
+    if state_id is not None:
+        state_id = 'State.' + state_id
+    return render_template('9-states.html', state_id=state_id)
 
 
 @app.teardown_appcontext
