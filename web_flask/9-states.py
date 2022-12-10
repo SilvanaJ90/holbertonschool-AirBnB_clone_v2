@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/states', strict_slashes=False)
 def states_cities(state_id=None):
     """ du must use storage for fetching data from the storage """
-    states = storage.all(State)
+    states = storage.all(State).values()
     if state_id is not None:
         state_id = 'State.' + state_id
     return render_template('9-states.html', states=states, state_id=state_id)
