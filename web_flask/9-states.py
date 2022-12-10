@@ -8,7 +8,7 @@ from models.state import State
 app = Flask(__name__)
 
 @app.route('/states', strict_slashes=False)
-@app.route('/states/<id>', strict_slashes=False)
+@app.route('/states/<state_id>', strict_slashes=False)
 def states_cities(state_id=None):
     """ du must use storage for fetching data from the storage """
     states = storage.all(State).values()
